@@ -1,12 +1,12 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename
-from upgrading.compare_json_files import compare_update_client_json_gitlab
+from upgrading.compare_json_files import compare_json
 from utils import utils
 
 def selectPath():
     path_=askopenfilename()
-    compare_update_client_json_gitlab(path_)
+    compare_json(path_)
     path.set(path_)
 
 
@@ -28,9 +28,9 @@ path=StringVar()
 # 第二层frame--第3个标签top
 
 frame_t=Frame(frameThree,height=900,bd=1,relief=SUNKEN)
-label1=Label(frame_t,text='git下载文件地址：',font=("微软雅黑", 12)).grid(row=0,column=0)
-entry=Entry(frame_t,textvariable=path).grid(row=0,column=1)
-button=Button(frame_t,text='路径选择',command=selectPath).grid(row=0,column=2)
+label1=Label(frame_t,text='git下载文件地址：',font=("微软雅黑", 12)).grid(row=1,column=0)
+entry=Entry(frame_t,textvariable=path).grid(row=1,column=1)
+button=Button(frame_t,text='路径选择',command=selectPath).grid(row=1,column=2)
 frame_t.pack(fill=X,padx=1,pady=1)
 
 #第二层frame--第3个标签down

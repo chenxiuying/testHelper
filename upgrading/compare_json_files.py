@@ -13,11 +13,12 @@ from lxml import etree
 # TODO: 使用前去gitlab中更新cookie
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36',
-    'Cookie': 'experimentation_subject_id=IjRiZDc2YmY3LTc2ZTMtNDg2ZS05OTg0LWIzYTJmZTNlZWZjNCI%3D--130bec20ce49167cad1c7f90a82315e3da8c0283; _gitlab_session=81536d319f7b35db8eabdba45876bd8f; event_filter=all; sidebar_collapsed=false'
+    'Cookie': 'experimentation_subject_id=Ijc4YTlkMTA3LTE3YmItNDc3MS04ZTMxLWEzNmQ0MjZjMTY5ZSI%3D--18d6b85f529ba4c49b185f0e8ab9f424fe8df5a1; _gitlab_session=ee3e418290c0ccb58d5f7f41454e44a1; event_filter=all; sidebar_collapsed=false'
 }
 
 
-def compare_update_client_json_208(client_name, version, flag=None):
+
+def compare_update_client_json_208(file_path):
     """
     :param client_name:
     :param version:
@@ -25,8 +26,10 @@ def compare_update_client_json_208(client_name, version, flag=None):
     :return:
     """
     main_url = 'http://172.16.0.208/'
+    client_name='ETClient'
     key = 'Modules'
-    if flag:
+    version = re.findall(r"[\d+][\.\d+]*", file_path)[0]
+    if  'Beta' in file_path:
         client_name = client_name + 'Beta'
         key = 'Beta' + key
     files_url = main_url + client_name + '/' + version + '/'
@@ -114,7 +117,12 @@ def compare_two_json(Beta=None):
     print('gitlab 与 208 json文件不一致')
 
 
-if __name__ == '__main__':
-    compare_update_client_json_gitlab("C:/Users/chenxiuying/Desktop/3.44.17.2002_EasyClientBeta.json")
-    # compare_update_client_json_208('ETClient', '3.44.18.2004')
-    # compare_two_json()
+def compare_json(file_path):
+    compare_update_client_json_gitlab(file_path);
+    print("=======================比较208平台json===========================")
+    compare_update_client_json_208(file_path);
+
+# if __name__ == '__main__':
+#     compare_update_client_json_gitlab("C:/Users/chenxiuying/Desktop/3.44.18.2004_EasyClient.json")
+#     #   compare_update_client_json_208('C:/Users/chenxiuying/Desktop/3.44.17.2002_EasyClientBeta.json')
+#     # compare_two_json()
